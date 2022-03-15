@@ -14,9 +14,11 @@ db.once("open", () => {
 });
 
 const expHbs = require("express-handlebars");
+app.engine("hbs", expHbs.engine({ defaultLayout: "main", extname: ".hbs" }));
+app.set("view engine", "hbs");
 
 app.get("/", (req, res) => {
-  res.send("This is my first Express Web App.");
+  res.render("index");
 });
 
 app.listen(port, () => {
