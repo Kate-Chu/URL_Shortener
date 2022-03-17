@@ -1,0 +1,35 @@
+<main
+  class="container d-flex justify-content-center align-items-center flex-column mt-5 mb-5"
+>
+  <h1 class="web-name fs-2 mb-4" style="color:#4590c6">URL Shortener</h1>
+  <div class="web-logo">
+    <a href="/">
+      <img src="../img/url.png" width="250" height="250" alt="web-logo" />
+    </a>
+  </div>
+  <form class="row g-3 mt-5">
+    <div class="col-12">
+      <input
+        type="url"
+        class="form-control mb-4 bg-light"
+        name="suburl"
+        id="input-url"
+        value="{{suburl}}"
+        disabled
+      />
+      <div class="result-message">
+        Success! Your shortened url is:
+        <div class="result-message__url"><a
+            href="{{suburl}}"
+          >http://ksokok.kokok</a></div>
+      </div>
+    </div>
+    <div class="col-12 d-flex justify-content-center">
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        type="submit"
+      >Copy</button>
+    </div>
+  </form>
+</main>
