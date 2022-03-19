@@ -15,6 +15,11 @@ const routes = require("./routes");
 const { env } = require("process");
 app.use(routes);
 
+app.use(function (err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).render("error");
+});
+
 app.listen(port, () => {
   console.log(`Express is running on http://localhost:${port}`);
 });

@@ -18,10 +18,11 @@
         disabled
       />
       <div class="result-message">
-        Success! Your shortened url is:
+        Success! Your short url is:
         <div class="result-message__url"><a
             href="{{suburl}}"
-          >http://ksokok.kokok</a></div>
+          >{{newUrl}}</a></div>  
+          {{!-- 加上很長的 domain 不 short 啊！ --}}
       </div>
     </div>
     <div class="col-12 d-flex justify-content-center">
