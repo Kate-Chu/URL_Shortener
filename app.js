@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const path = require("path");
 const expHbs = require("express-handlebars");
 
@@ -12,6 +12,7 @@ app.set("views", path.join(__dirname, "/views"));
 require("./config/mongoose");
 
 const routes = require("./routes");
+const { env } = require("process");
 app.use(routes);
 
 app.listen(port, () => {

@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
+const MONGODB_URI =
+  process.env.MONGODB_URI || "mongodb://localhost/URL_Shortener";
 
-mongoose.connect("mongodb://localhost/URL_Shortener");
+mongoose.connect(MONGODB_URI);
 
 const db = mongoose.connection;
 
