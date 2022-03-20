@@ -9,11 +9,11 @@ function randomString(length) {
     randString += Character[randNum];
   }
 
-  const existStr = Url.find().lean((urls) =>
-    urls.filter(url.randStr === randString)
-  );
+  // const existStr = Url.find().lean((urls) =>
+  //   urls.filter(url.randStr === randString)
+  // );
 
-  if (existStr) return randomString(length);
+  // if (existStr) return randomString(length);
 
   return randString;
 }

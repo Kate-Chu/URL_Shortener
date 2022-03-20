@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Url = require("../../models/url");
 const randomString = require("../../string-generator");
-const DOMAIN = "https://powerful-taiga-78579.herokuapp.com/";
+// const DOMAIN = "https://powerful-taiga-78579.herokuapp.com/";
 
 router.get("/result", (req, res) => {
   const suburl = req.query.suburl;
@@ -18,9 +18,9 @@ router.get("/result", (req, res) => {
         const shortURL = existUrl[0].shortURL;
         res.render("result", { suburl, newUrl: shortURL });
       } else {
-        let randStr = randomString(5);
-        let newUrl = DOMAIN + randStr;
-        const url = new Url({ originalUrl: suburl, shortURL: newUrl, randStr });
+        let newUrl = randomString(5);
+        // let newUrl = DOMAIN + randStr;
+        const url = new Url({ originalUrl: suburl, shortURL: newUrl });
         return url
           .save()
           .then(() => {
@@ -38,21 +38,11 @@ router.get("/result", (req, res) => {
     });
 });
 
-router.get("/:shortURL", (req, res) => {
-  const { shortURL } = req.params;
+router.get("/siJ9C", async (req, res) => {
 
-  URL.findOne({ shortURL })
-    .then((data) => {
-      if (!data) {
-        return res.render("error", {
-          errorMsg: "Can't found the URL",
-          errorURL: req.headers.host + "/" + shortURL,
-        });
-      }
-
-      res.redirect(data.originalURL);
-    })
-    .catch((error) => console.error(error));
+  const shortUrl = await Url.findOne({ shortURL: req.params.shortUrl });
+  if (!shortUrl) return res.sendStatus(404);
+  res.redirect(shortUrl.originalUrl);
 
   // const string = req.params.string;
   // return Url.find({ randStr: string })
