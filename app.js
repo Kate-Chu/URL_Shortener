@@ -16,7 +16,7 @@ require("./config/mongoose");
 
 app.use(routes);
 
-router.get("/:shortUrl", (req, res) => {
+app.get("/:shortUrl", (req, res) => {
   const Url = require("./models/url");
   const shortUrl = req.params;
   return Url.findOne({ shortUrl })
