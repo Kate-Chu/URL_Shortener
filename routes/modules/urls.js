@@ -40,16 +40,7 @@ router.get("/result", (req, res) => {
 
 router.get("/:id", (req, res) => {
   const id = req.params.id;
-  Url.find()
-    .lean()
-    .then((urls) => {
-      const url = urls.find((url) => {
-        url.id === id;
-      });
-      console.log(url);
-      res.render("result", { suburl: url.originalUrl, newUrl: url.shortURL });
-    })
-    .catch((error) => console.log(error));
+  res.send(`${id}`);
 });
 
 module.exports = router;
