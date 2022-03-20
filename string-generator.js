@@ -9,9 +9,12 @@ function randomString(length) {
     randString += Character[randNum];
   }
 
-  const existId = Url.find().lean((urls) => urls.filter((url.id = randString)));
+  const existStr = Url.find().lean((urls) =>
+    urls.filter(url.randStr === randString)
+  );
 
-  if (existId) return randomString(length);
+  if (existStr) return randomString(length);
+
   return randString;
 }
 

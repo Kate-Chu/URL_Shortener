@@ -18,9 +18,9 @@ router.get("/result", (req, res) => {
         const shortURL = existUrl[0].shortURL;
         res.render("result", { suburl, newUrl: shortURL });
       } else {
-        let id = randomString(5);
-        let newUrl = DOMAIN + id;
-        const url = new Url({ originalUrl: suburl, shortURL: newUrl, id });
+        let randStr = randomString(5);
+        let newUrl = DOMAIN + randStr;
+        const url = new Url({ originalUrl: suburl, shortURL: newUrl, randStr });
         return url
           .save()
           .then(() => {
@@ -38,9 +38,29 @@ router.get("/result", (req, res) => {
     });
 });
 
-router.get("/:id", (req, res) => {
-  const id = req.params.id;
-  res.send(`${id}`);
+router.get("/:shortURL", (req, res) => {
+  const { shortURL } = req.params;
+
+  URL.findOne({ shortURL })
+    .then((data) => {
+      if (!data) {
+        return res.render("error", {
+          errorMsg: "Can't found the URL",
+          errorURL: req.headers.host + "/" + shortURL,
+        });
+      }
+
+      res.redirect(data.originalURL);
+    })
+    .catch((error) => console.error(error));
+
+  // const string = req.params.string;
+  // return Url.find({ randStr: string })
+  //   .lean()
+  //   .then((url) =>
+  //     res.render("result", { suburl: url.originalUrl, newUrl: url.shortURL })
+  //   )
+  //   .catch((error) => console.error(error));
 });
 
 module.exports = router;

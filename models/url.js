@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const urlSchema = new Schema({
-  id: {
+  randStr: {
     type: String,
     required: true,
   },
