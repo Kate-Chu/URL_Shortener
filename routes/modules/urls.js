@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Url = require("../../models/url");
 const randomString = require("../../string-generator");
-// const DOMAIN = "https://powerful-taiga-78579.herokuapp.com/";
 
 router.get("/result", (req, res) => {
   const suburl = req.query.suburl;
@@ -18,8 +17,6 @@ router.get("/result", (req, res) => {
         const originalUrl = existUrl[0].originalUrl;
         res.render("result", { suburl, newUrl: shortUrl, originalUrl });
       } else {
-        // let newUrl = randomString(5);
-        // let newUrl = DOMAIN + randStr;
         let newUrl = req.headers.host + "/" + randomString(5);
         const url = new Url({ originalUrl: suburl, shortUrl: newUrl });
         return url
@@ -38,7 +35,5 @@ router.get("/result", (req, res) => {
       res.render("error", { error });
     });
 });
-
-
 
 module.exports = router;
