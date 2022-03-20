@@ -21,16 +21,24 @@
         Success! Your short url is:
         <div class="result-message__url"><a
             href="{{suburl}}"
-          >{{newUrl}}</a></div>  
-          {{!-- 加上很長的 domain 不 short 啊！ --}}
+            id="shortUrl"
+          >{{newUrl}}</a></div>
+        {{! 加上很長的 domain 不 short 啊！ }}
       </div>
     </div>
     <div class="col-12 d-flex justify-content-center">
       <button
         type="button"
-        class="btn btn-outline-primary"
+        class="btn btn-outline-primary btn-copy"
+        onclick="copy()"
         type="submit"
       >Copy</button>
+      <script>
+        function copy() { const shortUrl = document.querySelector("#shortUrl")
+        navigator.clipboard.writeText(shortUrl.textContent) .then(()=>
+        alert("Short url copied!")) .catch( err => console.log(err)) }
+      </script>
     </div>
   </form>
+
 </main>

@@ -17,7 +17,7 @@ app.use(routes);
 
 app.use(function (err, req, res, next) {
   console.error(err.stack);
-  res.status(500).render("error");
+  res.status(500).render("error", { error });
 });
 
 app.listen(port, () => {
