@@ -4,6 +4,7 @@ const port = process.env.PORT || 3000;
 const path = require("path");
 const expHbs = require("express-handlebars");
 const bodyParser = require("body-parser");
+const routes = require("./routes");
 
 app.use(express.static(path.join(__dirname, "public")));
 app.engine("handlebars", expHbs.engine({ defaultLayout: "main" }));
@@ -13,21 +14,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 require("./config/mongoose");
 
-const routes = require("./routes");
-
 app.use(routes);
 
-app.get("/:shortUrl", async (req, res) => {
-  const Url = require("./models/url");
-  const shortUrl = req.params;
-  return Url.findOne({ shortUrl })
-    .lean()
-    .then((item) => {
-      console.log(item);
-      res.redirect(item.originalUrl);
-    })
-    .catch((error) => console.error(error));
-});
+
 
 app.use(function (err, req, res, next) {
   console.error(err.stack);

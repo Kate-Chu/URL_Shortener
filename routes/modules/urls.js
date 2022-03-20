@@ -6,7 +6,6 @@ const randomString = require("../../string-generator");
 
 router.get("/result", (req, res) => {
   const suburl = req.query.suburl;
-
   Url.find()
     .lean()
     .then((urls) => {
@@ -38,6 +37,18 @@ router.get("/result", (req, res) => {
       console.log(error);
       res.render("error", { error });
     });
+});
+
+router.get("/:shortUrl", async (req, res) => {
+  const Url = require("./models/url");
+  const shortUrl = req.params;
+  return Url.findOne({ shortUrl })
+    .lean()
+    .then((item) => {
+      console.log(item);
+      res.redirect(item.originalUrl);
+    })
+    .catch((error) => console.error(error));
 });
 
 module.exports = router;
