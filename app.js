@@ -16,7 +16,17 @@ require("./config/mongoose");
 
 app.use(routes);
 
-
+app.get("/:shortUrl", (req, res) => {
+  const Url = require("./models/url");
+  const shortUrl = req.params;
+  return Url.findOne({ shortUrl })
+    .lean()
+    .then((item) => {
+      console.log(item);
+      res.redirect(item.originalUrl);
+    })
+    .catch((error) => console.error(error));
+});
 
 app.use(function (err, req, res, next) {
   console.error(err.stack);
