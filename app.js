@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const routes = require("./routes");
 
 // app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static("public"));
+// app.use(express.static("public"));
 app.engine("handlebars", expHbs.engine({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 app.set("views", path.join(__dirname, "/views"));
