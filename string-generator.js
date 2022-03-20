@@ -1,3 +1,5 @@
+const Url = require("./models/url");
+
 function randomString(length) {
   const Character =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -6,7 +8,11 @@ function randomString(length) {
     let randNum = Math.floor(Math.random() * Character.length);
     randString += Character[randNum];
   }
+
+  const existId = Url.find().lean((urls) => urls.filter((url.id = randString)));
+
+  if (existId) return randomString(length);
   return randString;
 }
 
-module.exports = randomString
+module.exports = randomString;

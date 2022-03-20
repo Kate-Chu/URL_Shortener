@@ -6,20 +6,21 @@ const DOMAIN = "https://powerful-taiga-78579.herokuapp.com/";
 
 router.get("/result", (req, res) => {
   const suburl = req.query.suburl;
-  const newUrl = DOMAIN + randomString(5);
 
   Url.find()
     .lean()
     .then((urls) => {
-      const existedUrl = urls.filter((url) => {
-        return url.originalUrl.toLowerCase() === suburl.toLowerCase();
-      });
+      const existUrl = urls.filter(
+        (url) => url.originalUrl.toLowerCase() === suburl.toLowerCase()
+      );
 
-      if (existedUrl.length) {
-        const shortURL = existedUrl[0].shortURL;
+      if (existUrl.length) {
+        const shortURL = existUrl[0].shortURL;
         res.render("result", { suburl, newUrl: shortURL });
       } else {
-        const url = new Url({ originalUrl: suburl, shortURL: newUrl });
+        let id = randomString(5);
+        let newUrl = DOMAIN + id;
+        const url = new Url({ originalUrl: suburl, shortURL: newUrl, id });
         return url
           .save()
           .then(() => {
@@ -27,16 +28,28 @@ router.get("/result", (req, res) => {
           })
           .catch((error) => {
             console.log(error);
-            res.render("error");
+            res.render("error", { error });
           });
       }
     })
     .catch((error) => {
       console.log(error);
-      res.render("error");
+      res.render("error", { error });
     });
 });
 
-router.get("/:id", (req, res) => {})
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+  Url.find()
+    .lean()
+    .then((urls) => {
+      const url = urls.find((url) => {
+        url.id === id;
+      });
+      console.log(url);
+      res.render("result", { suburl: url.originalUrl, newUrl: url.shortURL });
+    })
+    .catch((error) => console.log(error));
+});
 
 module.exports = router;
