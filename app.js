@@ -14,18 +14,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 require("./config/mongoose");
 
 const routes = require("./routes");
+
 app.use(routes);
+
+const Url = require("./models/url");
+app.get("/:shortUrl", async (req, res) => {
+   const shortUrl = await Url.findOne({ shortURL: req.params.shortUrl });
+  if (!shortUrl) return res.sendStatus(404);
+  res.redirect(shortUrl.originalUrl);
+});
 
 app.use(function (err, req, res, next) {
   console.error(err.stack);
   res.status(500).render("error", { error });
-});
-
-const Url = require("./models/url");
-app.get("/:shortUrl", (req, res) => {
-  const shortUrl = Url.findOne({ shortURL: req.params.shortUrl });
-  if (!shortUrl) return res.sendStatus(404);
-  res.redirect(shortUrl.originalUrl);
 });
 
 app.listen(port, () => {
