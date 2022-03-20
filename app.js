@@ -19,10 +19,13 @@ app.use(routes);
 
 app.get("/:shortUrl", async (req, res) => {
   const Url = require("./models/url");
-  const shortUrl = req.params.shortUrl;
-  return Url.findOne({ shortUrl: shortUrl })
+  const shortUrl = req.params;
+  return Url.findOne({ shortUrl })
     .lean()
-    .then((url) => res.redirect(url.originalUrl))
+    .then((item) => {
+      console.log(item);
+      res.redirect(item.originalUrl);
+    })
     .catch((error) => console.error(error));
 });
 
