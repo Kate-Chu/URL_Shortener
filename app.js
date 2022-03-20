@@ -17,11 +17,13 @@ const routes = require("./routes");
 
 app.use(routes);
 
-const Url = require("./models/url");
 app.get("/:shortUrl", async (req, res) => {
-   const shortUrl = await Url.findOne({ shortURL: req.params.shortUrl });
-  if (!shortUrl) return res.sendStatus(404);
-  res.redirect(shortUrl.originalUrl);
+  const Url = require("./models/url");
+  const shortUrl = req.params.shortUrl;
+  return Url.findOne({ shortUrl: shortUrl })
+    .lean()
+    .then((url) => res.redirect(url.originalUrl))
+    .catch((error) => console.error(error));
 });
 
 app.use(function (err, req, res, next) {

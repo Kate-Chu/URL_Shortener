@@ -15,16 +15,18 @@ router.get("/result", (req, res) => {
       );
 
       if (existUrl.length) {
-        const shortURL = existUrl[0].shortURL;
-        res.render("result", { suburl, newUrl: shortURL });
+        const shortUrl = existUrl[0].shortUrl;
+        const originalUrl = existUrl[0].originalUrl;
+        res.render("result", { suburl, newUrl: shortUrl, originalUrl });
       } else {
-        let newUrl = randomString(5);
+        // let newUrl = randomString(5);
         // let newUrl = DOMAIN + randStr;
-        const url = new Url({ originalUrl: suburl, shortURL: newUrl });
+        let newUrl = req.headers.host + "/" + randomString(5);
+        const url = new Url({ originalUrl: suburl, shortUrl: newUrl });
         return url
           .save()
           .then(() => {
-            res.render("result", { suburl, newUrl });
+            res.render("result", { suburl, newUrl, originalUrl: suburl });
           })
           .catch((error) => {
             console.log(error);
@@ -36,21 +38,6 @@ router.get("/result", (req, res) => {
       console.log(error);
       res.render("error", { error });
     });
-});
-
-router.get("/siJ9C", async (req, res) => {
-
-  const shortUrl = await Url.findOne({ shortURL: req.params.shortUrl });
-  if (!shortUrl) return res.sendStatus(404);
-  res.redirect(shortUrl.originalUrl);
-
-  // const string = req.params.string;
-  // return Url.find({ randStr: string })
-  //   .lean()
-  //   .then((url) =>
-  //     res.render("result", { suburl: url.originalUrl, newUrl: url.shortURL })
-  //   )
-  //   .catch((error) => console.error(error));
 });
 
 module.exports = router;
