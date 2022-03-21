@@ -1,8 +1,8 @@
 # 短網址產生器
 
-![image](https://github.com/Kate-Chu/Restaurant_List/blob/main/public/imgs/Url_Shortener_intro.jpg)
+![image](https://github.com/Kate-Chu/URL_Shortener/blob/main/imgs/Url_Shortener_intro.png)
 
-## 雲端部署版本頁面
+## Web Page - 雲端部署版本
 
 View on Heroku: https://powerful-taiga-78579.herokuapp.com/
 
