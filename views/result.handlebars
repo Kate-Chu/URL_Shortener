@@ -1,34 +1,33 @@
-
-  <form class="row g-3 mt-5">
-    <div class="col-12">
-      <input
-        type="url"
-        class="form-control mb-4 bg-light"
-        name="suburl"
-        id="input-url"
-        value="{{suburl}}"
-        disabled
-      />
-      <div class="result-message">
-        Success! Your short url is:
-        <div class="result-message__url"><a
-            href="{{originalUrl}}"
-            id="shortUrl"
-          >{{newUrl}}</a></div>
-        {{! 加上很長的 domain 不 short 啊！ }}
-      </div>
+<form class="row g-3 mt-5">
+  <div class="col-12">
+    <input
+      type="url"
+      class="form-control mb-4 bg-light"
+      name="suburl"
+      id="input-url"
+      value="{{suburl}}"
+      disabled
+    />
+    <div class="result-message">
+      Success! Your short url is:
+      <div class="result-message__url"><a
+          href="{{originalUrl}}"
+          id="shortUrl"
+        >{{shortUrl}}</a></div>
+      {{! 加上很長的 domain 不 short 啊！ }}
     </div>
-    <div class="col-12 d-flex justify-content-center">
-      <button
-        type="button"
-        class="btn btn-outline-primary btn-copy"
-        onclick="copy()"
-        type="submit"
-      >Copy</button>
-      <script>
-        function copy() { const shortUrl = document.querySelector("#shortUrl")
-        navigator.clipboard.writeText(shortUrl.textContent) .then(()=>
-        alert("Short url copied!")) .catch( err => console.log(err)) }
-      </script>
-    </div>
-  </form>
+  </div>
+  <div class="col-12 d-flex justify-content-center">
+    <button
+      type="button"
+      class="btn btn-outline-primary btn-copy"
+      onclick="copy()"
+      type="submit"
+    >Copy</button>
+    <script>
+      function copy() { const shortUrl = document.querySelector("#shortUrl")
+      navigator.clipboard.writeText(shortUrl.textContent) .then(()=>
+      alert("Short url copied!")) .catch( err => console.log(err)) }
+    </script>
+  </div>
+</form>

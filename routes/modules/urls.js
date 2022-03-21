@@ -15,14 +15,23 @@ router.get("/result", (req, res) => {
       if (existUrl.length) {
         const shortUrl = existUrl[0].shortUrl;
         const originalUrl = existUrl[0].originalUrl;
-        res.render("result", { suburl, newUrl: shortUrl, originalUrl });
+        res.render("result", { suburl, originalUrl, shortUrl });
       } else {
-        let newUrl = req.headers.host + "/" + randomString(5);
-        const url = new Url({ originalUrl: suburl, shortUrl: newUrl });
+        let urlRandStr = randomString(5);
+        let shortUrl = req.headers.host + "/" + urlRandStr;
+        const url = new Url({
+          originalUrl: suburl,
+          shortUrl,
+          urlRandStr,
+        });
         return url
           .save()
           .then(() => {
-            res.render("result", { suburl, newUrl, originalUrl: suburl });
+            res.render("result", {
+              suburl,
+              shortUrl,
+              originalUrl: suburl,
+            });
           })
           .catch((error) => {
             console.log(error);
@@ -36,5 +45,14 @@ router.get("/result", (req, res) => {
     });
 });
 
+// router.get("/:urlRandStr", (req, res) => {
+//   const { urlRandStr } = req.params;
+//   return Url.findOne({ urlRandStr })
+//     .lean()
+//     .then((item) => {
+//       res.redirect(item.originalUrl);
+//     })
+//     .catch((error) => console.error(error));
+// });
 
 module.exports = router;

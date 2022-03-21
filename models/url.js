@@ -8,7 +8,11 @@ const urlSchema = new Schema({
   },
   shortUrl: {
     type: String,
-    requires: true,
+    required: true,
+  },
+  urlRandStr: {
+    type: String,
+    required: true,
   },
 });
 
