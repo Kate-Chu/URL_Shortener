@@ -45,6 +45,7 @@ router.get("/result", (req, res) => {
     });
 });
 
+// 無法正確取得頁面
 // router.get("/:urlRandStr", (req, res) => {
 //   const { urlRandStr } = req.params;
 //   return Url.findOne({ urlRandStr })
