@@ -35,18 +35,25 @@ git clone https://github.com/Kate-Chu/URL_Shortener.git
 cd URL_Shortener
 ```
 
-4. 啟動伺服器，執行 app.js 檔案
+4. 安裝套件
+
+```
+npm install
+
+```
+
+5. 啟動伺服器，執行 app.js 檔案
 
 ```
 nodemon app.js
 ```
 
-5. 當終端機出現以下字樣，表示伺服器與資料庫已啟動並成功連結
+6. 當終端機出現以下字樣，表示伺服器與資料庫已啟動並成功連結
 
 ```
 Express is listening on localhost:3000
 ```
 
-6. 開啟任一瀏覽器，輸入 [http://localhost:3000](http://localhost:3000) ，或 (MacOS 系統) 在終端機中按住 Command 鍵點選 [http://localhost:3000]，即可開始使用我的餐廳清單網頁
+7. 開啟任一瀏覽器，輸入 [http://localhost:3000](http://localhost:3000) ，或 (MacOS 系統) 在終端機中按住 Command 鍵點選 [http://localhost:3000]，即可開始使用我的餐廳清單網頁
 
-7. 在終端機按下 control + C 即可結束程式
+8. 在終端機按下 control + C 即可結束程式
