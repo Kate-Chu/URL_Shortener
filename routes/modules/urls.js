@@ -18,7 +18,7 @@ router.get("/result", (req, res) => {
         res.render("result", { suburl, originalUrl, shortUrl });
       } else {
         let urlRandStr = randomString(5);
-        let shortUrl = req.headers.host + "/" + urlRandStr;
+        let shortUrl = req.headers.host + "/urls/" + urlRandStr;
         const url = new Url({
           originalUrl: suburl,
           shortUrl,
@@ -45,15 +45,15 @@ router.get("/result", (req, res) => {
     });
 });
 
-// 無法正確取得頁面
-// router.get("/:urlRandStr", (req, res) => {
-//   const { urlRandStr } = req.params;
-//   return Url.findOne({ urlRandStr })
-//     .lean()
-//     .then((item) => {
-//       res.redirect(item.originalUrl);
-//     })
-//     .catch((error) => console.error(error));
-// });
+router.get("/:urlRandStr", (req, res) => {
+  const { urlRandStr } = req.params;
+
+  return Url.findOne({ urlRandStr }) //
+    .lean()
+    .then((item) => {
+      res.redirect(item.originalUrl);
+    })
+    .catch((error) => console.error(error));
+});
 
 module.exports = router;

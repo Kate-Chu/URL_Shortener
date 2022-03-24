@@ -15,17 +15,6 @@ require("./config/mongoose");
 
 app.use(routes);
 
-app.get("/:urlRandStr", (req, res) => {
-  const Url = require("./models/url");
-  const { urlRandStr } = req.params;
-  return Url.findOne({ urlRandStr })
-    .lean()
-    .then((item) => {
-      res.redirect(item.originalUrl);
-    })
-    .catch((error) => console.error(error));
-});
-
 app.use(function (err, req, res, next) {
   console.error(err.stack);
   res.status(500).render("error", { err });
